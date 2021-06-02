@@ -27,3 +27,4 @@ export const getProducts = asyncHandler(async (req, res) => {
     }
    
   })
+

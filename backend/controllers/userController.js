@@ -83,7 +83,7 @@ export const authUser = asyncHandler(async (req, res) => {
 
       //@desc       update User Profile
 //route  ----PUT======== /api/users/profile
-//@access Private
+//@access Private/admin
 
   export const updateUserProfile = asyncHandler(async (req, res) => {
     const user  = await User.findByIdAndUpdate(req.user.id);
@@ -110,3 +110,83 @@ export const authUser = asyncHandler(async (req, res) => {
       throw new Error("User not found");
     }
 })
+
+
+    //@desc       Get all User -admin only
+//route  ----GET======== /api/users
+//@access private/ADdmin
+  // router.get("/api/users",getUsers);
+
+  export const getUsers = asyncHandler(async (req, res) => {
+    const users  = await User.find();
+
+  res.json(users)
+  
+})
+
+
+
+    //@desc      delete user
+//route  ----deLete======== /api/users/:ID
+//@access private/admin
+  // router.delete("/api/users/:id",deleteUser);
+
+  export const deleteUser = asyncHandler(async (req, res) => {
+    const user  = await User.findById(req.params.id);
+
+  if(user){
+     await user.remove();
+     res.json({message:"user removed"})
+  }else{
+    res.status(404);
+    throw new Error("user doesnot exist")
+  }
+  
+})
+
+
+
+    //@desc       Get  User by id
+//route  ----GET======== /api/users/:id
+//@access private/ADdmin
+  // router.get("/api/users/:id",getUserById);
+
+  export const getUserById = asyncHandler(async (req, res) => {
+    const user  = await User.findById(req.params.id).select('-password');
+if(user){
+  res.json(user)
+}else{
+  res.status(404);
+  throw new Error("user doesnot exist")
+} 
+})
+
+
+
+      //@desc       update User 
+//route  ----PUT======== /api/users/:id
+//@access Private/admin
+
+export const updateUser = asyncHandler(async (req, res) => {
+  const user  = await User.findByIdAndUpdate(req.params.id);
+
+
+  if(user){
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+   user.isAdmin = req.body.isAdmin 
+
+    const updatedUser  = await user.save();
+         
+    res.json({
+      _id:updatedUser._id,
+      name:updatedUser.name,
+      email:updatedUser.email,
+      isAdmin:updatedUser.isAdmin
+    });
+  }else{
+    res.status(404);
+    throw new Error("User not found");
+  }
+})
+

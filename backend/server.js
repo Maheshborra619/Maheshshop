@@ -1,10 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+// eslint-disable-next-line no-unused-vars
 import colors from "colors";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+
 import { errorHandler,notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -19,14 +21,13 @@ app.use("/api/products", productRoutes);
 app.use("/api/users",userRoutes);
 app.use("/api/orders",orderRoutes);
 
+
 app.get('/api/config/paypal',(req,res)=>res.send(process.env.PAYPAL_CLIENT_ID))
 
 app.use(notFound);
 app.use(errorHandler);
 
-app.get("/", (req, res) => {
-  res.send("mahesh....");
-});
+
 
 // app.get("/api/categories/:category", (req, res) => {
 //   const category = products.find((p) => p.category === req.params.category);
