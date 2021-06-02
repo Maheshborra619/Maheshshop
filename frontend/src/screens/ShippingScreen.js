@@ -33,7 +33,7 @@ const ShippingScreen = ({ history }) => {
           <Form.Control
             type="text"
             placeholder="Enter Your Address"
-            value={address}
+            value={address || ''}
             required
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
@@ -44,7 +44,7 @@ const ShippingScreen = ({ history }) => {
           <Form.Control
             type="text"
             placeholder="Enter Your City"
-            value={city}
+            value={city|| ''}
             required
             onChange={(e) => setCity(e.target.value)}
           ></Form.Control>
@@ -55,7 +55,7 @@ const ShippingScreen = ({ history }) => {
           <Form.Control
             type="text"
             placeholder="Enter Your Postalcode"
-            value={postalCode}
+            value={postalCode ||''}
             required
             onChange={(e) => setPostalCode(e.target.value)}
           ></Form.Control>
@@ -65,13 +65,13 @@ const ShippingScreen = ({ history }) => {
           <Form.Control
             type="text"
             placeholder="Enter Your Country"
-            value={country}
+            value={country || ''}
             required
             onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Button type="submit" variant="info">
-            Continue for payment
+            Continue to placeorder
         </Button>
       </Form>
     </FormContainer>
