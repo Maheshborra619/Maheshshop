@@ -6,6 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { register } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
+import validator from 'validator';
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -32,6 +33,10 @@ const RegisterScreen = ({ location, history }) => {
     e.preventDefault();
 
     //checkpassword
+    if(!validator.isEmail(email)){
+      setMessage("Please enter email in proper format eg.(foo@bar.com)")
+      return;
+    }
 
     if (password !== confirmPassword) {
       setMessage("Password do not match");
@@ -41,6 +46,9 @@ const RegisterScreen = ({ location, history }) => {
     }
   };
 
+ 
+  
+    
   return (
     <FormContainer>
       <h1>Sign Up</h1>
@@ -55,6 +63,7 @@ const RegisterScreen = ({ location, history }) => {
             placeholder="Enter Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="email">
@@ -62,7 +71,6 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type="email"
             placeholder="Enter Email address"
-            pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -76,6 +84,7 @@ const RegisterScreen = ({ location, history }) => {
             minLength="6"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="confirmPassword">
@@ -85,6 +94,7 @@ const RegisterScreen = ({ location, history }) => {
             placeholder="Enter password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
         <Button type="submit" variant="info">
