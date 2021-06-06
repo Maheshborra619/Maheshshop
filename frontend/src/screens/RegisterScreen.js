@@ -62,8 +62,10 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type="email"
             placeholder="Enter Email address"
+            pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="password">
@@ -71,6 +73,7 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type="password"
             placeholder="Enter password"
+            minLength="6"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>

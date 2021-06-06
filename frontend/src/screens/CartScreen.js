@@ -90,7 +90,7 @@ const CartScreen = ({ match, location, history }) => {
                 items
               </h2>
 
-              Price: $
+              Price: <i className="fa fa-inr"></i>
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
