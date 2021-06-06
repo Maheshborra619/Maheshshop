@@ -1,13 +1,6 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Button,
-  ListGroup,
-  Image,
-  Card,
-} from "react-bootstrap";
+import { Row, Col, Button, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckOutSteps from "../components/ChechOutSteps";
@@ -48,15 +41,17 @@ const PlaceOrderScreen = ({ history }) => {
   }, [history, success]);
 
   const placeOrderHandler = () => {
-    dispatch(createOrder({
-      orderItems: cart.cartItems,
-      shippingAddress: cart.shippingAddress,
-      paymentMethod: cart.paymentMethod,
-      itemsPrice: cart.itemsPrice,
-      taxPrice: cart.taxPrice,
-      shippingPrice: cart.shippingPricem,
-      totalPrice: cart.totalPrice,
-    }));
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   return (
@@ -149,7 +144,7 @@ const PlaceOrderScreen = ({ history }) => {
 
               <ListGroup.Item>
                 <Button
-                  className="btn btn-block"
+                  className="btn btn-block btn-info"
                   disabled={cart.cartItems.length === 0}
                   onClick={placeOrderHandler}
                 >

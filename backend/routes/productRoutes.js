@@ -1,26 +1,25 @@
-import express from "express";
-// import Product from "../model/productModel.js";
-// import asyncHandler from "express-async-handler";
-import {getProducts,getProductById} from "../controllers/productController.js";
-
-const router = express.Router();
-
-
-//@desc fetch all products
-//route get /api/products
-//@access public
-router.route("/").get(getProducts);
-
-  //@desc fetch product by id
-//route get /api/products/:id
-//@access public
-  // router.get("/:id",getProductById);
-
-router.route("/:id").get(getProductById);
-  
+import express from 'express'
+// eslint-disable-next-line import/first
+import {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+  createProductReview,
+  getTopProducts,
+} from '../controllers/productController.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
+const router = express.Router()
 
 
-  
+router.route('/').get(getProducts).post(protect, admin, createProduct)
+router.route('/:id/reviews').post(protect, createProductReview)
+router.get('/top', getTopProducts)
+router
+  .route('/:id')
+  .get(getProductById)
+  .delete(protect, admin, deleteProduct)
+  .put(protect, admin, updateProduct)
 
-
-export default router;
+export default router
