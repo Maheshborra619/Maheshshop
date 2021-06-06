@@ -23,7 +23,7 @@ const logoutHandler = ()=>{
     <Navbar bg="info" variant="dark" expand="lg" collapseOnSelect>
       <Container>
         <LinkContainer to="/">
-          <Navbar.Brand>SHOP</Navbar.Brand>
+          <Navbar.Brand>Product Shop</Navbar.Brand>
         </LinkContainer>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
